@@ -243,7 +243,7 @@ def main():
 
                 f"({real_x} cm, {real_y} cm)",
 
-                (20, 40),
+                (220, 270),
 
                 cv2.FONT_HERSHEY_SIMPLEX,
 

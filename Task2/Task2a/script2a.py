@@ -49,6 +49,27 @@ def localize_bot():
     # Populate the result dictionary in the format: result["markers"]["id_<num>"] = {"distance_z": <val>, "x_offset": <val>}
 
 
+    # ==========================================
+    # SORT MARKERS BY ARUCO ID
+    # ==========================================
+    result["markers"] = dict(
+
+        sorted(
+
+            result["markers"].items(),
+
+            key=lambda item: int(
+                item[0].split("_")[1]
+            ),
+            reverse=True
+        )
+
+    )
+
+    # ==========================================
+    # RETURN FINAL OUTPUT
+    # ==========================================
+
     return result
 
 if __name__ == "__main__":
