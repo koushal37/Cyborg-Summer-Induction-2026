@@ -104,6 +104,54 @@ def analyze_video(video_path):
         # WRITE YOUR LOGIC BELOW
         # ==========================================
 
+
+        if contours:
+            
+            largest_contour = max(contours, key=cv2.contourArea)
+            
+            
+            if cv2.contourArea(largest_contour) > 100:
+                
+               
+                M = cv2.moments(largest_contour)
+                if M["m00"] != 0:
+                    cx = int(M["m10"] / M["m00"])
+                    cy = int(M["m01"] / M["m00"])
+                    
+                    
+                    
+                    
+                    if cx <= wall_threshold:
+                        if not left_collision:
+                            result["left_wall_hits"] += 1
+                            left_collision = True
+                    else:
+                        left_collision = False
+                        
+                  
+                    if cx >= WIDTH - wall_threshold:
+                        if not right_collision:
+                            result["right_wall_hits"] += 1
+                            right_collision = True
+                    else:
+                        right_collision = False
+                        
+                    
+                    if cy <= wall_threshold:
+                        if not top_collision:
+                            result["top_wall_hits"] += 1
+                            top_collision = True
+                    else:
+                        top_collision = False
+                        
+                    
+                    if cy >= HEIGHT - wall_threshold:
+                        if not bottom_collision:
+                            result["bottom_wall_hits"] += 1
+                            bottom_collision = True
+                    else:
+                        bottom_collision = False
+
         '''
         Suggested Steps:
 
